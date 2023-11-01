@@ -1,0 +1,38 @@
+#include<bits/stdc++.h>
+using namespace std;
+int digitsum(int n){
+    int sum=0;
+     while(n>0){
+         int k=n%10;
+         sum=sum+k;
+         n=n/10;
+     }
+     
+     return sum;
+}
+
+int main(){
+    //int n; cin>>n;
+    int a[]={51,32,43};
+    unordered_map<int,int>um;
+    int ans=-1;
+    int i=0;
+    while(i<3){
+        if(um.find(digitsum(a[i]))!=um.end()){
+            int pp=a[i] + um[digitsum(a[i])];
+            ans=max(ans,pp);
+            um[digitsum(a[i])]=max(um[digitsum(a[i])],a[i]);
+        }
+        
+        else{
+            um[digitsum(a[i])]=a[i];
+        }
+       
+      i++;
+    }
+      
+    for(auto &it : um){
+        cout<<it.first<<" "<<it.second<<endl;
+    }
+    cout<<ans<<endl;
+}
